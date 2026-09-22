@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Форма школьника</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5 mb-5">
+    <h2>Данные школьника</h2>
+
+    <form action="#" th:action="@{/schoolboys/save}" th:object="${schoolboy}" method="post" class="mt-4">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label>Фамилия:</label>
+            <input type="text" class="form-control" th:field="*{surname}" required/>
+        </div>
+        <div class="form-group">
+            <label>Имя:</label>
+            <input type="text" class="form-control" th:field="*{name}" required/>
+        </div>
+        <div class="form-group">
+            <label>Отчество:</label>
+            <input type="text" class="form-control" th:field="*{patronymic}"/>
+        </div>
+        <div class="form-group">
+            <label>Пол:</label>
+            <input type="text" class="form-control" th:field="*{gender}"/>
+        </div>
+        <div class="form-group">
+            <label>Национальность:</label>
+            <input type="text" class="form-control" th:field="*{nationality}"/>
+        </div>
+        <div class="form-group">
+            <label>Рост (в метрах, например 1.65):</label>
+            <input type="number" step="0.01" class="form-control" th:field="*{height}"/>
+        </div>
+        <div class="form-group">
+            <label>Вес (в кг):</label>
+            <input type="number" step="0.1" class="form-control" th:field="*{weight}"/>
+        </div>
+        <div class="form-group">
+            <label>Дата рождения:</label>
+            <input type="date" class="form-control" th:field="*{birthDate}"/>
+        </div>
+        <div class="form-group">
+            <label>Номер телефона:</label>
+            <input type="text" class="form-control" th:field="*{phoneNumber}"/>
+        </div>
+        <div class="form-group">
+            <label>Домашний телефон:</label>
+            <input type="text" class="form-control" th:field="*{homePhone}"/>
+        </div>
+
+        <button type="submit" class="btn btn-success">Сохранить</button>
+        <a href="/schoolboys/main" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+</body>
+</html>

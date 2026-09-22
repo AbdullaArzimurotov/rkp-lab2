@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Информация о школьнике</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Подробная информация о школьнике</h2>
+    <div class="card mt-3">
+        <div class="card-body">
+            <p><strong>ID:</strong> <span th:text="${selectedSchoolboy.id}"></span></p>
+            <p><strong>Фамилия:</strong> <span th:text="${selectedSchoolboy.surname}"></span></p>
+            <p><strong>Имя:</strong> <span th:text="${selectedSchoolboy.name}"></span></p>
+            <p><strong>Отчество:</strong> <span th:text="${selectedSchoolboy.patronymic}"></span></p>
+            <p><strong>Пол:</strong> <span th:text="${selectedSchoolboy.gender}"></span></p>
+            <p><strong>Национальность:</strong> <span th:text="${selectedSchoolboy.nationality}"></span></p>
+            <p><strong>Рост:</strong> <span th:text="${selectedSchoolboy.height}"></span> м</p>
+            <p><strong>Вес:</strong> <span th:text="${selectedSchoolboy.weight}"></span> кг</p>
+            <p><strong>Дата рождения:</strong> <span th:text="${selectedSchoolboy.birthDate}"></span></p>
+            <p><strong>Номер телефона:</strong> <span th:text="${selectedSchoolboy.phoneNumber}"></span></p>
+            <p><strong>Домашний телефон:</strong> <span th:text="${selectedSchoolboy.homePhone}"></span></p>
+        </div>
+    </div>
+    <br>
+    <a href="/schoolboys/main" class="btn btn-primary">Вернуться назад</a>
+</div>
+</body>
+</html>
