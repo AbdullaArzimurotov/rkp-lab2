@@ -1,0 +1,35 @@
+:root { color-scheme: light; font: 16px/1.5 system-ui, sans-serif; color: #192638; background: #eef2f6; }
+* { box-sizing: border-box; }
+body { margin: 0; padding: 48px 24px; }
+main { margin: 0 auto; background: #fff; padding: 34px 38px; border: 1px solid #dbe3ed; border-radius: 14px; box-shadow: 0 8px 28px #20334b0c; }
+.paper { max-width: 800px; }
+.wide { max-width: 1160px; }
+h1, h2 { margin: 0 0 16px; line-height: 1.2; }
+h1 { font-size: 32px; letter-spacing: -.02em; }
+h2 { margin-top: 24px; font-size: 21px; }
+p { margin: 0 0 20px; }
+a { color: #174994; }
+nav, .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+header { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 24px; }
+header h1 { margin: 0; }
+button, .button { display: inline-block; padding: 9px 15px; border: 1px solid #234f91; background: #234f91; color: #fff; border-radius: 7px; font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; }
+.secondary { background: #fff; color: #234f91; }
+.danger { background: #fff; color: #972c35; border-color: #c78e94; }
+label { display: block; font-weight: 650; }
+input, select { display: block; width: 100%; margin-top: 5px; padding: 8px 10px; background: #fff; color: inherit; font: inherit; border: 1px solid #aebdce; border-radius: 6px; }
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 20px; margin-bottom: 22px; }
+.filters { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.panel { background: #f5f8fb; border: 1px solid #dbe3ed; padding: 18px; border-radius: 8px; margin-bottom: 22px; }
+.panel .grid { margin-bottom: 14px; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid #dbe3ed; }
+th { background: #e9eff6; }
+.table { overflow-x: auto; }
+dl { display: grid; grid-template-columns: minmax(7rem, 1fr) 2fr; margin: 0 0 22px; }
+dt, dd { padding: 7px 10px; border-bottom: 1px solid #dbe3ed; margin: 0; overflow-wrap: anywhere; }
+dt { font-weight: 650; }
+.error { color: #8a1e28; background: #fceef0; border: 1px solid #eec4c8; padding: 12px 16px; border-radius: 6px; }
+.summary { margin-top: 10px; }
+.muted { color: #4b5d71; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #4081d6; outline-offset: 2px; }
+@media (max-width: 720px) { body { padding: 20px 10px; } main { padding: 22px; } .grid { grid-template-columns: 1fr; } }

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Лабораторная 2" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="ru.kafpin.laboratoriya2.Laboratoriya2Application" />
+    <module name="laboratoriya2" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

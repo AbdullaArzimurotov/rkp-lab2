@@ -1,68 +1,66 @@
 package ru.kafpin.laboratoriya2;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 @RequestMapping("/schoolboys")
 public class SchoolboyController {
+    private final SchoolboyRepository schoolboys;
 
-    @Autowired
-    private SchoolboyRepository schoolboyRepository;
+    public SchoolboyController(SchoolboyRepository schoolboys) {
+        this.schoolboys = schoolboys;
+    }
 
-    // 1. Barcha o'quvchilarni jadvalda ko'rsatish
-    @GetMapping("/main")
+    @GetMapping({"", "/main"})
     public String mainPage(Model model) {
-        model.addAttribute("schoolboys", schoolboyRepository.findAll());
+        model.addAttribute("schoolboys", schoolboys.findAll());
         return "main";
     }
 
-    // 2. Bitta o'quvchi haqida batafsil ma'lumot
     @GetMapping("/details/{id}")
-    public String details(@PathVariable("id") Long id, Model model) {
-        Optional<Schoolboy> schoolboy = schoolboyRepository.findById(id);
-        if (schoolboy.isEmpty()) {
-            return "redirect:/schoolboys/main";
-        }
-        model.addAttribute("selectedSchoolboy", schoolboy.get());
+    public String details(@PathVariable Long id, Model model) {
+        model.addAttribute("selectedSchoolboy", find(id));
         return "details";
     }
 
-    // 3. Yangi o'quvchi qo'shish formasi
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("schoolboy", new Schoolboy());
         return "form";
     }
 
-    // 4. Yangi ma'lumotni yoki tahrirni saqlash
-    @PostMapping("/save")
-    public String saveSchoolboy(@ModelAttribute Schoolboy schoolboy) {
-        schoolboyRepository.save(schoolboy);
-        return "redirect:/schoolboys/main";
-    }
-
-    // 5. O'zgartirish (tahrirlash) formasi
     @GetMapping("/update/{id}")
-    public String editForm(@PathVariable("id") Long id, Model model) {
-        Optional<Schoolboy> schoolboy = schoolboyRepository.findById(id);
-        if (schoolboy.isEmpty()) {
-            return "redirect:/schoolboys/main";
-        }
-        model.addAttribute("schoolboy", schoolboy.get());
+    public String editForm(@PathVariable Long id, Model model) {
+        model.addAttribute("schoolboy", find(id));
         return "form";
     }
 
-    // 6. O'quvchini bazadan o'chirish
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Long id) {
-        if (schoolboyRepository.existsById(id)) {
-            schoolboyRepository.deleteById(id);
+    @PostMapping("/save")
+    public String saveSchoolboy(@Valid @ModelAttribute Schoolboy schoolboy, BindingResult errors) {
+        if (schoolboy.getId() != null) {
+            find(schoolboy.getId());
         }
+        if (errors.hasErrors()) {
+            return "form";
+        }
+        schoolboys.save(schoolboy);
         return "redirect:/schoolboys/main";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        schoolboys.delete(find(id));
+        return "redirect:/schoolboys/main";
+    }
+
+    private Schoolboy find(Long id) {
+        return schoolboys.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Школьник не найден."));
     }
 }

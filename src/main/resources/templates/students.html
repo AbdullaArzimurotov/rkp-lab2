@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Студенты</title>
+    <link rel="stylesheet" th:href="@{/app.css}">
+</head>
+<body>
+<main class="wide">
+<header>
+    <h1>Студенты</h1>
+    <a class="button secondary" th:href="@{/schoolboys/main}">К школьникам</a>
+</header>
+<p class="muted">Пример отдельной сущности из методических указаний.</p>
+<div class="table">
+<table>
+    <thead><tr><th>Фамилия</th><th>Имя</th><th>Отчество</th><th>Город</th><th>Пол</th><th>Возраст</th><th>Группа</th><th>Факультет</th></tr></thead>
+    <tbody><tr th:each="record : ${students}"><td th:text="${record.surname}"></td><td th:text="${record.name}"></td><td th:text="${record.patronymic}"></td><td th:text="${record.city}"></td><td th:text="${record.gender}"></td><td th:text="${record.age}"></td><td th:text="${record.studyGroup}"></td><td th:text="${record.faculty}"></td></tr></tbody>
+</table>
+</div>
+<h2>Новый студент</h2>
+<form th:action="@{/students}" th:object="${student}" method="post">
+    <ul class="error" th:if="${#fields.hasAnyErrors()}">
+        <li th:each="error : ${#fields.allErrors()}" th:text="${error}"></li>
+    </ul>
+<div class="grid">
+    <label>Фамилия<input type="text" th:field="*{surname}" required maxlength="80"></label>
+    <label>Имя<input type="text" th:field="*{name}" required maxlength="80"></label>
+    <label>Отчество<input type="text" th:field="*{patronymic}" maxlength="80"></label>
+    <label>Город<input type="text" th:field="*{city}" required></label>
+    <label>Возраст<input type="number" th:field="*{age}" min="14" max="100" required></label>
+    <label>Группа<input type="text" th:field="*{studyGroup}" required></label>
+    <label>Факультет<input type="text" th:field="*{faculty}" required></label>
+<label>Пол<select th:field="*{gender}" required>
+    <option value="">Выберите значение</option>
+    <option value="Мужской">Мужской</option>
+    <option value="Женский">Женский</option>
+    </select></label>
+</div>
+<button type="submit">Добавить студента</button>
+</form>
+</main>
+</body>
+</html>

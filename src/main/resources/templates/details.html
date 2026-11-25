@@ -1,30 +1,34 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <title>Информация о школьнике</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточка школьника</title>
+    <link rel="stylesheet" th:href="@{/app.css}">
 </head>
 <body>
-<div class="container mt-5">
-    <h2>Подробная информация о школьнике</h2>
-    <div class="card mt-3">
-        <div class="card-body">
-            <p><strong>ID:</strong> <span th:text="${selectedSchoolboy.id}"></span></p>
-            <p><strong>Фамилия:</strong> <span th:text="${selectedSchoolboy.surname}"></span></p>
-            <p><strong>Имя:</strong> <span th:text="${selectedSchoolboy.name}"></span></p>
-            <p><strong>Отчество:</strong> <span th:text="${selectedSchoolboy.patronymic}"></span></p>
-            <p><strong>Пол:</strong> <span th:text="${selectedSchoolboy.gender}"></span></p>
-            <p><strong>Национальность:</strong> <span th:text="${selectedSchoolboy.nationality}"></span></p>
-            <p><strong>Рост:</strong> <span th:text="${selectedSchoolboy.height}"></span> м</p>
-            <p><strong>Вес:</strong> <span th:text="${selectedSchoolboy.weight}"></span> кг</p>
-            <p><strong>Дата рождения:</strong> <span th:text="${selectedSchoolboy.birthDate}"></span></p>
-            <p><strong>Номер телефона:</strong> <span th:text="${selectedSchoolboy.phoneNumber}"></span></p>
-            <p><strong>Домашний телефон:</strong> <span th:text="${selectedSchoolboy.homePhone}"></span></p>
-        </div>
-    </div>
-    <br>
-    <a href="/schoolboys/main" class="btn btn-primary">Вернуться назад</a>
+<main class="paper">
+<h1>Карточка школьника</h1>
+<dl>
+    <dt>Идентификатор</dt><dd th:text="${selectedSchoolboy.id}"></dd>
+    <dt>Фамилия</dt><dd th:text="${selectedSchoolboy.surname}"></dd>
+    <dt>Имя</dt><dd th:text="${selectedSchoolboy.name}"></dd>
+    <dt>Отчество</dt><dd th:text="${selectedSchoolboy.patronymic}"></dd>
+    <dt>Пол</dt><dd th:text="${selectedSchoolboy.gender}"></dd>
+    <dt>Национальность</dt><dd th:text="${selectedSchoolboy.nationality}"></dd>
+    <dt>Рост, см</dt><dd th:text="${selectedSchoolboy.height}"></dd>
+    <dt>Вес, кг</dt><dd th:text="${selectedSchoolboy.weight}"></dd>
+    <dt>Дата рождения</dt><dd th:text="${selectedSchoolboy.birthDate}"></dd>
+    <dt>Мобильный телефон</dt><dd th:text="${selectedSchoolboy.phoneNumber}"></dd>
+    <dt>Домашний телефон</dt><dd th:text="${selectedSchoolboy.homePhone}"></dd>
+</dl>
+<div class="actions">
+    <a class="button" th:href="@{/schoolboys/update/{id}(id=${selectedSchoolboy.id})}">Изменить</a>
+    <form th:action="@{/schoolboys/delete/{id}(id=${selectedSchoolboy.id})}" method="post">
+        <button class="danger" type="submit">Удалить</button>
+    </form>
+    <a class="button secondary" th:href="@{/schoolboys/main}">К списку</a>
 </div>
+</main>
 </body>
 </html>
